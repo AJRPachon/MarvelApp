@@ -1,49 +1,72 @@
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-}
+import es.ajrpachon.android.AppConfig
+import es.ajrpachon.android.dependencies.Dependencies
+import es.ajrpachon.android.dependencies.Modules
+import es.ajrpachon.android.dependencies.Plugins
+
+apply plugin: Plugins.androidApplication
+apply from: "$rootDir/base__kotlin_android.gradle"
+apply from: "$rootDir/base__feature.gradle"
+apply from: "$rootDir/base__common_dependencies.gradle"
+apply from: "$rootDir/gradle/projectDependencyGraph.gradle"
 
 android {
-    namespace 'es.ajrpachon.marvelapp'
-    compileSdk 33
 
     defaultConfig {
-        applicationId "es.ajrpachon.marvelapp"
-        minSdk 24
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        applicationId AppConfig.applicationId
     }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            applicationIdSuffix '.dev'
+        }
+
+        preproduction {
+            applicationIdSuffix '.pre'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+
+    android {
+        buildFeatures {
+            buildConfig = true
+        }
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_17
+            targetCompatibility JavaVersion.VERSION_17
+        }
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-    buildFeatures {
-        viewBinding true
-    }
+
 }
+
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    //API
+    implementation Dependencies.Retrofit.core
+    implementation Dependencies.Retrofit.moshi
+    implementation Dependencies.OkHttp.httpLoggingInterceptor
+
+    //NAVIGATION
+    implementation project(Modules.navigation)
+
+    //DATA
+    implementation project(Modules.dataLocal)
+    implementation project(Modules.dataRemote)
+    implementation project(Modules.dataRepository)
+    implementation project(Modules.dataSource)
+
+    //FEATURE MODULES
+    implementation project(Modules.featureOnboarding)
+    implementation project(Modules.featureCharacterList)
+    implementation project(Modules.featureComicList)
+    implementation project(Modules.featureComicDetail)
+
+
 }
+

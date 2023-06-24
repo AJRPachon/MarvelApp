@@ -8,6 +8,6 @@ object Plugins {
     const val kotlin = "kotlin"
     const val kotlinAndroid = "kotlin-android"
     const val kotlinApt = "kotlin-kapt"
-    const val navigationSafeArgsKotlion = "androidx.navigation.safeargs.kotlin"
+    const val navigationSafeArgsKotlin = "androidx.navigation.safeargs.kotlin"
     const val hilt = "dagger.hilt.android.plugin"
 }
