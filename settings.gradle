@@ -1,16 +1,19 @@
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-rootProject.name = "MarvelApp"
+
 include ':app'
+include ':navigation'
+include ':common'
+
+include ':features:onboarding'
+include ':features:characterlist'
+include ':features:comiclist'
+include ':features:comicDetail'
+
+include ':data:datasource'
+include ':data:local'
+include ':data:remote'
+include ':data:model'
+include ':data:repository'
+include ':navigation'
+include ':navigation'
+include ':data'
+include ':data:session'
