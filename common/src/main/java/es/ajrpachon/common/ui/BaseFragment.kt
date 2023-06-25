@@ -5,40 +5,38 @@ import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import es.ajrpachon.common.extensions.setupSnackbar
+import es.ajrpachon.navigation.NavigationCommand
 
 abstract class BaseFragment : Fragment() {
 
-    //TODO descomentar cuando se implemente NavigationCommand
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        observeNavigation(getViewModel())
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        observeNavigation(getViewModel())
         setupSnackbar(this, getViewModel().getSnackbarError(), Snackbar.LENGTH_LONG)
     }
 
     abstract fun getViewModel(): BaseViewModel
 
-//    private fun observeNavigation(viewModel: BaseViewModel) {
-//        viewModel.getNavigation().observe(viewLifecycleOwner, Observer {
-//            it?.getContentIfNotHandled()?.let { command ->
-//                when (command) {
-//                    is NavigationCommand.To -> findNavController().navigate(
-//                        command.directions,
-//                        getExtras()
-//                    )
-//
-//                    is NavigationCommand.Back -> findNavController().navigateUp()
-//                }
-//            }
-//        })
-//    }
+    private fun observeNavigation(viewModel: BaseViewModel) {
+        viewModel.getNavigation().observe(viewLifecycleOwner) {
+            it?.getContentIfNotHandled()?.let { command ->
+                when (command) {
+                    is NavigationCommand.To -> findNavController().navigate(
+                        command.directions,
+                        getExtras()
+                    )
+
+                    is NavigationCommand.Back -> findNavController().navigateUp()
+                }
+            }
+        }
+    }
 
     /**
      * When [navGraphId] isn't null, returns a [ViewModel] scoped to the Navigation Graph life
