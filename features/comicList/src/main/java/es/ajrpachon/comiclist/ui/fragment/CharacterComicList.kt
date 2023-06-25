@@ -1,21 +1,82 @@
 package es.ajrpachon.comiclist.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import es.ajrpachon.comiclist.R
+import es.ajrpachon.comiclist.databinding.FragmentCharacterComicListBinding
+import es.ajrpachon.comiclist.ui.adapter.CharacterComicListAdapter
+import es.ajrpachon.comiclist.ui.viewmodel.CharacterComicListViewModel
+import es.ajrpachon.common.ui.BaseFragment
+import es.ajrpachon.common.ui.BaseViewModel
+import es.ajrpachon.data.repository.util.AsyncResult
 
+@AndroidEntryPoint
+class CharacterComicList : BaseFragment() {
 
-class CharacterComicList : Fragment() {
+    private val args: CharacterComicListArgs by navArgs()
+
+    private val viewModel: CharacterComicListViewModel by viewModelBinder(R.id.nav_graph__comic_list_feature)
+
+    private var binding: FragmentCharacterComicListBinding? = null
+
+    private val adapter by lazy {
+        CharacterComicListAdapter {
+            viewModel.goToComicDetail(it)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_character_comic_list, container, false)
+        binding = FragmentCharacterComicListBinding.inflate(inflater, container, false)
+        return binding?.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        configureView()
+        configureObservers()
+    }
+
+    private fun configureView() {
+        binding?.let {
+            with(it) {
+                characterComicListListComicList.layoutManager = GridLayoutManager(
+                    requireActivity().applicationContext,
+                    2,
+                    LinearLayoutManager.VERTICAL,
+                    false
+                )
+                characterComicListListComicList.adapter = adapter
+            }
+        }
+    }
+
+    private fun configureObservers() {
+        viewModel.requestCharactersComicList(args.characterId)
+        viewModel.getCharacterComicListLiveData().observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is AsyncResult.Success -> {
+
+                    adapter.submitList(result.data)
+
+                }
+
+                is AsyncResult.Error -> { /* no-op */
+                }
+
+                is AsyncResult.Loading -> { /* no-op */
+                }
+            }
+        }
+    }
+
+    override fun getViewModel() = viewModel as BaseViewModel
 
 }

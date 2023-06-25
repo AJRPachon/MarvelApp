@@ -15,12 +15,12 @@
         android:layout_marginBottom="@dimen/dimen5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/characterListRowContainer"
+            android:id="@+id/characterComicListRowContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/characterListRowImgCharacterImg"
+                android:id="@+id/characterComicListRowImgCharacterImg"
                 android:layout_width="@dimen/dimen160dp"
                 android:layout_height="@dimen/dimen160dp"
                 android:layout_margin="@dimen/dimen10dp"
@@ -28,21 +28,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/character_image" />
-
-            <TextView
-                android:id="@+id/characterListRowLblCharacterName"
-                android:layout_width="@dimen/dimen0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen10dp"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/dimen18sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/characterListRowImgCharacterImg"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:contentDescription="@string/character_comic_image" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

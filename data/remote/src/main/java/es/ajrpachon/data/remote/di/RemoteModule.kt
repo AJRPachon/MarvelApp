@@ -5,7 +5,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import es.ajrpachon.data.datasource.charactercomic.CharacterComicRemoteDataSource
 import es.ajrpachon.data.datasource.characters.CharacterRemoteDataSource
+import es.ajrpachon.data.remote.charactercomic.CharacterComicRemoteDataSourceImpl
+import es.ajrpachon.data.remote.charactercomic.CharacterComicWs
 import es.ajrpachon.data.remote.characters.CharacterRemoteDataSourceImpl
 import es.ajrpachon.data.remote.characters.CharactersWs
 import okhttp3.Interceptor
@@ -53,7 +56,15 @@ class RemoteModule(
         retrofit.create(CharactersWs::class.java)
 
     @Provides
+    fun characterComicServiceProvider(retrofit: Retrofit) =
+        retrofit.create(CharacterComicWs::class.java)
+
+    @Provides
     fun characterListServiceProvider(charactersWs: CharactersWs) =
         CharacterRemoteDataSourceImpl(charactersWs) as CharacterRemoteDataSource
+
+    @Provides
+    fun characterComicListServiceProvider(characterComicWs: CharacterComicWs) =
+        CharacterComicRemoteDataSourceImpl(characterComicWs) as CharacterComicRemoteDataSource
 
 }
