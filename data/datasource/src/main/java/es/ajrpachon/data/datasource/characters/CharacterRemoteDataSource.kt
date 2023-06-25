@@ -1,8 +1,8 @@
 package es.ajrpachon.data.datasource.characters
 
-import es.ajrpachon.data.model.character.CharacterBo
+import es.ajrpachon.data.model.common.CommonBaseBo
 
 interface CharacterRemoteDataSource {
 
-    suspend fun getCharacter(id: Long): CharacterBo
+    suspend fun getCharacter(id: Long): CommonBaseBo
 }

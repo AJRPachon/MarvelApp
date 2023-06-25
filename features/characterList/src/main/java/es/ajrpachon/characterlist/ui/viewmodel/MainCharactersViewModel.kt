@@ -6,7 +6,7 @@ import es.ajrpachon.characterlist.domain.GetCharacterUseCase
 import es.ajrpachon.characterlist.ui.fragment.MainCharactersFragmentDirections
 import es.ajrpachon.common.ui.BaseViewModel
 import es.ajrpachon.common.util.lifecycle.MutableSourceLiveData
-import es.ajrpachon.data.model.character.CharacterBo
+import es.ajrpachon.data.model.common.CommonBaseBo
 import es.ajrpachon.data.repository.util.AppDispatchers
 import es.ajrpachon.data.repository.util.AsyncResult
 import kotlinx.coroutines.launch
@@ -18,10 +18,10 @@ class MainCharactersViewModel @Inject constructor(
     private val dispatchers: AppDispatchers
 ): BaseViewModel() {
 
-    private var characterThorListLiveData = MutableSourceLiveData<AsyncResult<CharacterBo>>(dispatchers)
-    private var characterCaptainAmericaListLiveData = MutableSourceLiveData<AsyncResult<CharacterBo>>(dispatchers)
-    private var characterHulkListLiveData = MutableSourceLiveData<AsyncResult<CharacterBo>>(dispatchers)
-    private var characterIronManListLiveData = MutableSourceLiveData<AsyncResult<CharacterBo>>(dispatchers)
+    private var characterThorListLiveData = MutableSourceLiveData<AsyncResult<CommonBaseBo>>(dispatchers)
+    private var characterCaptainAmericaListLiveData = MutableSourceLiveData<AsyncResult<CommonBaseBo>>(dispatchers)
+    private var characterHulkListLiveData = MutableSourceLiveData<AsyncResult<CommonBaseBo>>(dispatchers)
+    private var characterIronManListLiveData = MutableSourceLiveData<AsyncResult<CommonBaseBo>>(dispatchers)
 
     fun getCharacterThorLiveData() = characterThorListLiveData.liveData()
     fun getCharacterCaptainAmericaLiveData() = characterCaptainAmericaListLiveData.liveData()

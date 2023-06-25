@@ -6,10 +6,13 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import es.ajrpachon.data.datasource.charactercomic.CharacterComicRemoteDataSource
 import es.ajrpachon.data.datasource.characters.CharacterRemoteDataSource
+import es.ajrpachon.data.datasource.comiddetail.ComicDetailRemoteDataSource
 import es.ajrpachon.data.repository.charactercomic.CharacterComicRepository
 import es.ajrpachon.data.repository.charactercomic.CharacterComicRepositoryImpl
 import es.ajrpachon.data.repository.characters.CharacterRepository
 import es.ajrpachon.data.repository.characters.CharacterRepositoryImpl
+import es.ajrpachon.data.repository.comicdetail.ComicDetailRepository
+import es.ajrpachon.data.repository.comicdetail.ComicDetailRepositoryImpl
 import es.ajrpachon.data.repository.util.AppDispatchers
 import kotlinx.coroutines.Dispatchers
 
@@ -38,4 +41,13 @@ object RepositoryModule {
         remote,
         appdispatchers
     ) as CharacterComicRepository
+
+    @Provides
+    fun comicDetailRepository(
+        remote: ComicDetailRemoteDataSource,
+        appdispatchers: AppDispatchers
+    ) = ComicDetailRepositoryImpl(
+        remote,
+        appdispatchers
+    ) as ComicDetailRepository
 }

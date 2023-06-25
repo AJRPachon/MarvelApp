@@ -7,10 +7,13 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import es.ajrpachon.data.datasource.charactercomic.CharacterComicRemoteDataSource
 import es.ajrpachon.data.datasource.characters.CharacterRemoteDataSource
+import es.ajrpachon.data.datasource.comiddetail.ComicDetailRemoteDataSource
 import es.ajrpachon.data.remote.charactercomic.CharacterComicRemoteDataSourceImpl
 import es.ajrpachon.data.remote.charactercomic.CharacterComicWs
 import es.ajrpachon.data.remote.characters.CharacterRemoteDataSourceImpl
 import es.ajrpachon.data.remote.characters.CharactersWs
+import es.ajrpachon.data.remote.comicdetail.ComicDetailRemoteDataSourceImpl
+import es.ajrpachon.data.remote.comicdetail.ComicDetailWs
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -60,11 +63,19 @@ class RemoteModule(
         retrofit.create(CharacterComicWs::class.java)
 
     @Provides
-    fun characterListServiceProvider(charactersWs: CharactersWs) =
+    fun comicDetailServiceProvider(retrofit: Retrofit) =
+        retrofit.create(ComicDetailWs::class.java)
+
+    @Provides
+    fun characterListRemoteDataSourceProvider(charactersWs: CharactersWs) =
         CharacterRemoteDataSourceImpl(charactersWs) as CharacterRemoteDataSource
 
     @Provides
-    fun characterComicListServiceProvider(characterComicWs: CharacterComicWs) =
+    fun characterComicListRemoteDataSourceProvider(characterComicWs: CharacterComicWs) =
         CharacterComicRemoteDataSourceImpl(characterComicWs) as CharacterComicRemoteDataSource
+
+    @Provides
+    fun comicDetailRemoteDataSourceProvider(comicDetailWs: ComicDetailWs) =
+        ComicDetailRemoteDataSourceImpl(comicDetailWs) as ComicDetailRemoteDataSource
 
 }

@@ -1,13 +1,13 @@
 package es.ajrpachon.data.remote.characters
 
 import es.ajrpachon.data.datasource.characters.CharacterRemoteDataSource
-import es.ajrpachon.data.model.character.CharacterBo
+import es.ajrpachon.data.model.common.CommonBaseBo
 
 class CharacterRemoteDataSourceImpl(
     private val charactersWs: CharactersWs
 ) : CharacterRemoteDataSource {
 
-    override suspend fun getCharacter(id: Long): CharacterBo {
+    override suspend fun getCharacter(id: Long): CommonBaseBo {
         return charactersWs.getCharacter(
             id,
             1000,

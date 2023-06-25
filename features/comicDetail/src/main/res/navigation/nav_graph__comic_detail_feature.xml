@@ -10,7 +10,7 @@
         android:label="ComicDetail">
 
         <argument
-            android:name="characterId"
+            android:name="comicId"
             app:argType="long"
             android:defaultValue="0L"/>
 

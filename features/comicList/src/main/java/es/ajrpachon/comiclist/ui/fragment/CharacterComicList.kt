@@ -63,9 +63,7 @@ class CharacterComicList : BaseFragment() {
         viewModel.getCharacterComicListLiveData().observe(viewLifecycleOwner) { result ->
             when (result) {
                 is AsyncResult.Success -> {
-
                     adapter.submitList(result.data)
-
                 }
 
                 is AsyncResult.Error -> { /* no-op */
@@ -75,6 +73,11 @@ class CharacterComicList : BaseFragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
     override fun getViewModel() = viewModel as BaseViewModel

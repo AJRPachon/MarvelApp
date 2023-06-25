@@ -24,7 +24,7 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/characterComicList">
             <argument
-                android:name="characterId"
+                android:name="comicId"
                 app:argType="long"
                 android:defaultValue="0L"/>
         </action>
