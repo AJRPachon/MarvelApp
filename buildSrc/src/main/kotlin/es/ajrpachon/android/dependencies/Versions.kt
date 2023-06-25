@@ -45,7 +45,7 @@ object Versions {
     }
 
     object Glide {
-        const val glideVersion = "4.13.1"
+        const val glideVersion = "4.15.1"
     }
 
 

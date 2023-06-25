@@ -4,6 +4,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import es.ajrpachon.data.datasource.characters.CharacterRemoteDataSource
+import es.ajrpachon.data.repository.characters.CharacterRepository
+import es.ajrpachon.data.repository.characters.CharacterRepositoryImpl
 import es.ajrpachon.data.repository.util.AppDispatchers
 import kotlinx.coroutines.Dispatchers
 
@@ -15,4 +18,12 @@ object RepositoryModule {
     fun appDispatchersProvider() =
         AppDispatchers(Dispatchers.Main, Dispatchers.Default, Dispatchers.IO)
 
+    @Provides
+    fun charactersRepository(
+        remote: CharacterRemoteDataSource,
+        appdispatchers: AppDispatchers
+    ) = CharacterRepositoryImpl(
+        remote,
+        appdispatchers
+    ) as CharacterRepository
 }

@@ -5,6 +5,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import es.ajrpachon.data.datasource.characters.CharacterRemoteDataSource
+import es.ajrpachon.data.remote.characters.CharacterRemoteDataSourceImpl
+import es.ajrpachon.data.remote.characters.CharactersWs
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,7 +18,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class RemoteModule(
-    private val endpoint: String = "" //TODO BASE URL
+    private val endpoint: String = "https://gateway.marvel.com/v1/public/"
 ) {
 
     @Provides
@@ -44,5 +47,13 @@ class RemoteModule(
             .baseUrl(endpoint)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
+
+    @Provides
+    fun characterServiceProvider(retrofit: Retrofit) =
+        retrofit.create(CharactersWs::class.java)
+
+    @Provides
+    fun characterListServiceProvider(charactersWs: CharactersWs) =
+        CharacterRemoteDataSourceImpl(charactersWs) as CharacterRemoteDataSource
 
 }

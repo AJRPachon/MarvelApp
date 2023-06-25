@@ -12,10 +12,9 @@
         android:label="Onboarding"
         tools:layout="@layout/fragment_onboarding">
 
-
         <action
             android:id="@+id/action_onboarding_to_nav_graph_character_list_feature"
-            app:destination="@id/nav_graph__character_list_feature"
+            app:destination="@id/nav_graph__main_characters_feature"
             app:enterAnim="@anim/nav_default_pop_enter_anim"
             app:exitAnim="@anim/nav_default_pop_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -23,6 +22,6 @@
             app:popUpTo="@id/onboardingFragment" />
     </fragment>
 
-    <include app:graph="@navigation/nav_graph__character_list_feature"/>
+    <include app:graph="@navigation/nav_graph__main_characters_feature"/>
 
 </navigation>

@@ -25,16 +25,15 @@ class CharacterListAdapter : ListAdapter<CharacterBo, CharacterListAdapter.Chara
     inner class CharacterViewHolder(private val binding : CharacterListCharacterRowBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(character: CharacterBo) {
-            binding.let {
-                with(it) {
-                    characterListRowLblCharacterName.text = character.name
-
-                    Glide.with(binding.root)
-                        .load(character.image)
-                        .error(es.ajrpachon.common.R.drawable.ic_launcher_background)
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .into(characterListRowImgCharacterImg)
-                }
+            with(binding) {
+                characterListRowLblCharacterName.text = character.name
+                Glide.with(binding.root)
+                    .load("${character.image?.path}.${character.image?.extension}")
+                    .error(es.ajrpachon.common.R.drawable.ic_launcher_background)
+                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(characterListRowImgCharacterImg)
             }
         }
     }
