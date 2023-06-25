@@ -9,15 +9,16 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dagger.hilt.android.AndroidEntryPoint
 import es.ajrpachon.characterlist.R
 import es.ajrpachon.characterlist.databinding.FragmentMainCharactersBinding
-import es.ajrpachon.characterlist.ui.viewmodel.CharacterListViewModel
+import es.ajrpachon.characterlist.ui.viewmodel.MainCharactersViewModel
 import es.ajrpachon.common.ui.BaseFragment
 import es.ajrpachon.common.ui.BaseViewModel
+import es.ajrpachon.common.util.utils.getSecureUrl
 import es.ajrpachon.data.repository.util.AsyncResult
 
 @AndroidEntryPoint
 class MainCharactersFragment : BaseFragment() {
 
-    private val viewModel: CharacterListViewModel by viewModelBinder(R.id.nav_graph__main_characters_feature)
+    private val viewModel: MainCharactersViewModel by viewModelBinder(R.id.nav_graph__main_characters_feature)
 
     private var binding: FragmentMainCharactersBinding? = null
 
@@ -144,13 +145,6 @@ class MainCharactersFragment : BaseFragment() {
             }
         }
     }
-
-
-    //TODO mover a utils
-    private fun getSecureUrl(originalUrl: String): String {
-        return originalUrl.replace("http://", "https://")
-    }
-
 
     override fun getViewModel() = viewModel as BaseViewModel
 

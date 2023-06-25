@@ -4,7 +4,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import es.ajrpachon.data.datasource.charactercomic.CharacterComicRemoteDataSource
 import es.ajrpachon.data.datasource.characters.CharacterRemoteDataSource
+import es.ajrpachon.data.repository.charactercomic.CharacterComicRepository
+import es.ajrpachon.data.repository.charactercomic.CharacterComicRepositoryImpl
 import es.ajrpachon.data.repository.characters.CharacterRepository
 import es.ajrpachon.data.repository.characters.CharacterRepositoryImpl
 import es.ajrpachon.data.repository.util.AppDispatchers
@@ -26,4 +29,13 @@ object RepositoryModule {
         remote,
         appdispatchers
     ) as CharacterRepository
+
+    @Provides
+    fun characterComicRepository(
+        remote: CharacterComicRemoteDataSource,
+        appdispatchers: AppDispatchers
+    ) = CharacterComicRepositoryImpl(
+        remote,
+        appdispatchers
+    ) as CharacterComicRepository
 }

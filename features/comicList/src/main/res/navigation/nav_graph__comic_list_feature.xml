@@ -10,6 +10,27 @@
         android:name="es.ajrpachon.comiclist.ui.fragment.CharacterComicList"
         android:label="CharacterComicList">
 
+        <argument
+            android:name="characterId"
+            app:argType="long"
+            android:defaultValue="0L"/>
+
+        <action
+            android:id="@+id/action_character_comic_list_to_character_comic_detail"
+            app:destination="@id/nav_graph__comic_detail_feature"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/nav_default_pop_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/characterComicList">
+            <argument
+                android:name="characterId"
+                app:argType="long"
+                android:defaultValue="0L"/>
+        </action>
+
     </fragment>
+
+    <include app:graph="@navigation/nav_graph__comic_detail_feature"/>
 
 </navigation>
