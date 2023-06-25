@@ -5,15 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
 import es.ajrpachon.common.util.lifecycle.Event
+import es.ajrpachon.navigation.NavigationCommand
 
 abstract class BaseViewModel : ViewModel() {
 
-    //TODO descomentar cuando se haya creado la clase NavigationCommand
-
     //For navigation
-//    private val navigation = MutableLiveData<Event<NavigationCommand>>()
-//
-//    fun getNavigation() = navigation as LiveData<Event<NavigationCommand>>
+    private val navigation = MutableLiveData<Event<NavigationCommand>>()
+
+    fun getNavigation() = navigation as LiveData<Event<NavigationCommand>>
 
     //For error handler
     private val snackbarError = MutableLiveData<Event<String>>()
@@ -24,11 +23,11 @@ abstract class BaseViewModel : ViewModel() {
      * Convenient method to handle navigation from a [ViewModel]
      */
     fun navigate(directions: NavDirections) {
-        //navigation.value = Event(NavigationCommand.To(directions))
+        navigation.value = Event(NavigationCommand.To(directions))
     }
 
     fun navigateBack() {
-        //navigation.value = Event(NavigationCommand.Back)
+        navigation.value = Event(NavigationCommand.Back)
     }
 
 }
