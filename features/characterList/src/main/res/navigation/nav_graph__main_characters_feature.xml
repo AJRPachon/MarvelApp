@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph__main_characters_feature"
+    app:startDestination="@id/mainCharacterFragment"
+    tools:ignote="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/mainCharacterFragment"
+        android:name="es.ajrpachon.characterlist.ui.fragment.MainCharactersFragment"
+        android:label="CharacterList"
+        tools:layout="@layout/fragment_main_characters">
+
+        <action
+            android:id="@+id/action_main_characters_to_character_comic_list"
+            app:destination="@id/nav_graph__comic_list_feature"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/nav_default_pop_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/mainCharacterFragment">
+            <argument
+                android:name="characterId"
+                app:argType="long"
+                android:defaultValue="0L"/>
+        </action>
+
+    </fragment>
+
+    <include app:graph="@navigation/nav_graph__comic_list_feature"/>
+
+</navigation>

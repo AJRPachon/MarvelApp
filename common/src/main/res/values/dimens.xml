@@ -7,6 +7,7 @@
     <dimen name="dimen0dp">0dp</dimen>
     <dimen name="dimen5dp">5dp</dimen>
     <dimen name="dimen10dp">10dp</dimen>
+    <dimen name="dimen40dp">40dp</dimen>
     <dimen name="dimen160dp">160dp</dimen>
 
 </resources>

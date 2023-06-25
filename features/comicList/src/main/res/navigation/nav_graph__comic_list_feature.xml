@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph__comic_list_feature"
+    app:startDestination="@id/characterComicList">
+
+    <fragment
+        android:id="@+id/characterComicList"
+        android:name="es.ajrpachon.comiclist.ui.fragment.CharacterComicList"
+        android:label="CharacterComicList">
+
+    </fragment>
+
+</navigation>
