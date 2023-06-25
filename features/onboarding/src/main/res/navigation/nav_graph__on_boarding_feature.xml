@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph__on_boarding_feature"
+    app:startDestination="@id/onboardingFragment"
+    tools:ignote="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="es.ajrpachon.onboarding.ui.fragment.OnboardingFragment"
+        android:label="Onboarding"
+        tools:layout="@layout/fragment_onboarding">
+
+        <action
+            android:id="@+id/action_onboarding_to_nav_graph_character_list_feature"
+            app:destination="@id/nav_graph__main_characters_feature"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/nav_default_pop_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/onboardingFragment" />
+    </fragment>
+
+    <include app:graph="@navigation/nav_graph__main_characters_feature"/>
+
+</navigation>

@@ -1,0 +1,4 @@
+
+apply from: "$rootDir/configuration__feature_module.gradle"
+apply plugin: 'org.jetbrains.kotlin.android'
+
