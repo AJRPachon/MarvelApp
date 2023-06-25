@@ -61,6 +61,7 @@ class Dependencies {
 
     object Glide {
         const val glide = "com.github.bumptech.glide:glide:${Versions.Glide.glideVersion}"
+        const val glideAnnotation = "com.github.bumptech.glide:annotations:${Versions.Glide.glideVersion}"
         const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.Glide.glideVersion}"
     }
 }

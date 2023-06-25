@@ -80,4 +80,9 @@ dependencies {
     //LIVEDATA
     implementation Dependencies.Androidx.lifecycleSavedState
     implementation Dependencies.Androidx.liveDataKtxExtensions
+
+    //GLIDE
+    implementation Dependencies.Glide.glide
+    implementation Dependencies.Glide.glideAnnotation
+    kapt Dependencies.Glide.glideCompiler
 }
