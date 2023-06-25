@@ -9,9 +9,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import es.ajrpachon.comiclist.databinding.CharacterComicListComicRowBinding
 import es.ajrpachon.common.util.utils.getSecureUrl
-import es.ajrpachon.data.model.charactercomic.CharacterComicBo
+import es.ajrpachon.data.model.common.CommonBaseBo
 
-class CharacterComicListAdapter(private val callback: (Long) -> Unit) : ListAdapter<CharacterComicBo, CharacterComicListAdapter.CharacterComicViewHolder>(CharacterCallBack()) {
+class CharacterComicListAdapter(private val callback: (Long) -> Unit) : ListAdapter<CommonBaseBo, CharacterComicListAdapter.CharacterComicViewHolder>(CharacterCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterComicViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -24,7 +24,7 @@ class CharacterComicListAdapter(private val callback: (Long) -> Unit) : ListAdap
 
     inner class CharacterComicViewHolder(private val binding : CharacterComicListComicRowBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(characterComic: CharacterComicBo) {
+        fun bind(characterComic: CommonBaseBo) {
             with(binding) {
                 Glide.with(binding.root)
                     .load(getSecureUrl("${characterComic.image?.path}.${characterComic.image?.extension}"))
@@ -44,12 +44,12 @@ class CharacterComicListAdapter(private val callback: (Long) -> Unit) : ListAdap
 
 }
 
-class CharacterCallBack : DiffUtil.ItemCallback<CharacterComicBo>() {
-    override fun areItemsTheSame(oldItem: CharacterComicBo, newItem: CharacterComicBo): Boolean {
+class CharacterCallBack : DiffUtil.ItemCallback<CommonBaseBo>() {
+    override fun areItemsTheSame(oldItem: CommonBaseBo, newItem: CommonBaseBo): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: CharacterComicBo, newItem: CharacterComicBo): Boolean {
+    override fun areContentsTheSame(oldItem: CommonBaseBo, newItem: CommonBaseBo): Boolean {
         return oldItem == newItem
     }
 

@@ -7,7 +7,7 @@ import es.ajrpachon.comiclist.domain.GetCharacterComicListUseCase
 import es.ajrpachon.comiclist.ui.fragment.CharacterComicListDirections
 import es.ajrpachon.common.ui.BaseViewModel
 import es.ajrpachon.common.util.lifecycle.MutableSourceLiveData
-import es.ajrpachon.data.model.charactercomic.CharacterComicBo
+import es.ajrpachon.data.model.common.CommonBaseBo
 import es.ajrpachon.data.repository.util.AppDispatchers
 import es.ajrpachon.data.repository.util.AsyncResult
 import kotlinx.coroutines.launch
@@ -19,7 +19,7 @@ class CharacterComicListViewModel @Inject constructor(
     private val dispatchers: AppDispatchers
 ) : BaseViewModel() {
 
-    private val characterComicListLiveData = MutableSourceLiveData<AsyncResult<List<CharacterComicBo>>>(dispatchers)
+    private val characterComicListLiveData = MutableSourceLiveData<AsyncResult<List<CommonBaseBo>>>(dispatchers)
 
     fun getCharacterComicListLiveData() = characterComicListLiveData.liveData()
 

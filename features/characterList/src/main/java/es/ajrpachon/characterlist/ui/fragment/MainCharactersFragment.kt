@@ -146,6 +146,11 @@ class MainCharactersFragment : BaseFragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
     override fun getViewModel() = viewModel as BaseViewModel
 
 }
