@@ -63,16 +63,29 @@ class CharacterComicList : BaseFragment() {
         viewModel.getCharacterComicListLiveData().observe(viewLifecycleOwner) { result ->
             when (result) {
                 is AsyncResult.Success -> {
+                    binding?.hideLoading()
                     adapter.submitList(result.data)
                 }
 
-                is AsyncResult.Error -> { /* no-op */
+                is AsyncResult.Error -> {
+                    binding?.hideLoading()
                 }
 
-                is AsyncResult.Loading -> { /* no-op */
+                is AsyncResult.Loading -> {
+                    binding?.showLoading()
                 }
             }
         }
+    }
+
+    private fun FragmentCharacterComicListBinding.showLoading() {
+        characterComicListListComicList.visibility = View.GONE
+        characterComicListProgressBarLoading.visibility = View.VISIBLE
+    }
+
+    private fun FragmentCharacterComicListBinding.hideLoading() {
+        characterComicListListComicList.visibility = View.VISIBLE
+        characterComicListProgressBarLoading.visibility = View.GONE
     }
 
     override fun onDestroyView() {
