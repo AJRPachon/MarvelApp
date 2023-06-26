@@ -42,6 +42,8 @@ class MainCharactersFragment : BaseFragment() {
                     binding?.let { bindingNoNull ->
                         with(bindingNoNull) {
 
+                            hideLoading()
+
                             Glide.with(this.root)
                                 .load(getSecureUrl("${it.data?.image?.path}.${it.data?.image?.extension}"))
                                 .error(es.ajrpachon.common.R.drawable.ic_launcher_background)
@@ -58,9 +60,13 @@ class MainCharactersFragment : BaseFragment() {
 
                 }
 
-                is AsyncResult.Error -> { /* no-op */ }
+                is AsyncResult.Error -> {
+                    binding?.hideLoading()
+                 }
 
-                is AsyncResult.Loading -> { /* no-op */ }
+                is AsyncResult.Loading -> {
+                    binding?.showLoading()
+                }
             }
         }
 
@@ -144,6 +150,22 @@ class MainCharactersFragment : BaseFragment() {
                 is AsyncResult.Loading -> { /* no-op */ }
             }
         }
+    }
+
+    private fun FragmentMainCharactersBinding.showLoading() {
+        mainCharactersImgHulk.visibility = View.GONE
+        mainCharactersImgIronMan.visibility = View.GONE
+        mainCharactersImgThor.visibility = View.GONE
+        mainCharactersImgCaptainAmerica.visibility = View.GONE
+        mainCharactersProgressBarLoading.visibility = View.VISIBLE
+    }
+
+    private fun FragmentMainCharactersBinding.hideLoading() {
+        mainCharactersImgHulk.visibility = View.VISIBLE
+        mainCharactersImgIronMan.visibility = View.VISIBLE
+        mainCharactersImgThor.visibility = View.VISIBLE
+        mainCharactersImgCaptainAmerica.visibility = View.VISIBLE
+        mainCharactersProgressBarLoading.visibility = View.GONE
     }
 
     override fun onDestroyView() {
