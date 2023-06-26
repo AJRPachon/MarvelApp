@@ -16,5 +16,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/character_comic_list__comic__row"/>
 
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/characterComicListProgressBarLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationZ="@dimen/dimen10dp"
+        style="@style/Widget.AppCompat.ProgressBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

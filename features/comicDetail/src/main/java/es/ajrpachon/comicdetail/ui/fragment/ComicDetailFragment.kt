@@ -46,6 +46,9 @@ class ComicDetailFragment : BaseFragment() {
                 is AsyncResult.Success -> {
                     binding?.let { bindingNoNull ->
                         with(bindingNoNull) {
+
+                            hideLoading()
+
                             comicDetailLblComicTitle.text = result.data?.title
                             comicDetailLblComicDescription.text = result.data?.description
 
@@ -61,12 +64,32 @@ class ComicDetailFragment : BaseFragment() {
 
                 }
 
-                is AsyncResult.Error -> { /* no-op */ }
+                is AsyncResult.Error -> {
+                    binding?.hideLoading()
+                }
 
-                is AsyncResult.Loading -> { /* no-op */ }
+                is AsyncResult.Loading -> {
+                    binding?.showLoading()
+                }
             }
         }
     }
+
+    private fun FragmentComicDetailBinding.showLoading() {
+        comicDetailLblComicTitle.visibility = View.GONE
+        comicDetailImgComicImg.visibility = View.GONE
+        comicDetailLblComicDescription.visibility = View.GONE
+        comicDetailProgressBarLoading.visibility = View.VISIBLE
+    }
+
+    private fun FragmentComicDetailBinding.hideLoading() {
+        comicDetailLblComicTitle.visibility = View.VISIBLE
+        comicDetailImgComicImg.visibility = View.VISIBLE
+        comicDetailLblComicDescription.visibility = View.VISIBLE
+        comicDetailProgressBarLoading.visibility = View.GONE
+    }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
